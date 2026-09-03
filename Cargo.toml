@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "core",
+    "checker",
+    "syntax",
+    "wasm",
+    "cli"
+]
+resolver = "2"
