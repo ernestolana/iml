@@ -1,12 +1,13 @@
 export const presets = {
     robotic_trajectory: {
         name: "Robotic Trajectory Task",
-        human: "0: Alloc\n1: Var(robot_arm)\n2: Add -> 0, 1\n",
+        human: "0: Alloc\n1: Var(robot_arm)\n2: Add -> 0, 1\n3: Drop -> 0\n",
         ast: JSON.stringify({
             nodes: [
                 { t: { L: null }, c: [], r: "Allocate memory for trajectory", o: "mem1" },
                 { t: { V: "robot_arm" }, c: [], r: "Robot arm state" },
-                { t: { A: null }, c: [0, 1], r: "Combine allocation and state" }
+                { t: { A: null }, c: [0, 1], r: "Combine allocation and state" },
+                { t: { D: null }, c: [0], r: "Free memory" }
             ]
         }, null, 2)
     },

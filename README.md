@@ -114,7 +114,7 @@ When you type in the AST Arena or the Semantic Overlay, the playground instantly
 Load the pre-configured presets using the dropdown toolbar, and try these modifications:
 
 * **Robotic Trajectory Task**
-  * *Try this*: Delete the `Alloc` node in the Semantic English overlay.
+  * *Try this*: Delete the `Drop` node in the Semantic English overlay.
   * *What to expect*: The Machine-Native AST will instantly update, and the Diagnostics panel will throw a `RepairError` trace (e.g. an `UnconsumedResource` or a missing reference), mimicking the exact constrained feedback loop an LLM receives.
 * **Quantum State Matrix**
   * *Try this*: In the Machine-Native AST Arena, duplicate the index `2` reference in the `Drop` node's children (`"c": [2, 2]`).
