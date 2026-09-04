@@ -1,4 +1,4 @@
-
+ï»¿# -*- coding: utf-8 -*-
 readme_addition = """
 ## Empirical Benchmarks & Comparative Analysis
 
@@ -26,9 +26,9 @@ Benchmarking parser throughput and linear-type schema validation (`check_arena`)
 | System | Parsing Latency (Task A) | Validation Latency | Ops/sec (Ingest + Check) |
 | :--- | :--- | :--- | :--- |
 | **IML (Rust `serde` + `check_arena`)** | **~450 ns** | **~350 ns** | **~1,250,000 ops/sec** |
-| Python 3.12 (`ast.parse`) | ~12.5 µs | N/A (Dynamic) | ~80,000 ops/sec |
-| JS V8 (`JSON.parse`) | ~1.2 µs | N/A | ~830,000 ops/sec |
-| Verbose JSON Schema Validate | ~35.0 µs | ~150.0 µs | ~5,400 ops/sec |
+| Python 3.12 (`ast.parse`) | ~12.5 Âµs | N/A (Dynamic) | ~80,000 ops/sec |
+| JS V8 (`JSON.parse`) | ~1.2 Âµs | N/A | ~830,000 ops/sec |
+| Verbose JSON Schema Validate | ~35.0 Âµs | ~150.0 Âµs | ~5,400 ops/sec |
 
 ### 3. Error Diagnostic Overhead (Self-Repair)
 When returning hallucination or type-check errors back to the LLM agent, IML ensures minimal context window consumption by emitting `NodeIndex`-based traces.
@@ -45,7 +45,7 @@ IML ASTs are natively executed in a highly constrained `wasmtime` Component Mode
 
 | Execution Environment | Overhead vs Native | Infinite Loop Trap Time | Trapping Mechanism |
 | :--- | :--- | :--- | :--- |
-| **IML (Wasmtime + Fuel Limit)** | **~5-8%** | **< 10 µs** | **Deterministic Fuel Exhaustion** |
+| **IML (Wasmtime + Fuel Limit)** | **~5-8%** | **< 10 Âµs** | **Deterministic Fuel Exhaustion** |
 | Python 3.12 (Standard) | ~2000% | N/A (Hangs indefinitely) | OS Interrupt (SIGINT) / Timeout |
 | JavaScript (Node.js vm) | ~500% | N/A (Hangs indefinitely) | Event Loop Block / Watchdog |
 | Rust (Native) | Baseline (0%) | N/A (Hangs indefinitely) | OS Interrupt |
