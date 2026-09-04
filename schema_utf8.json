@@ -1,0 +1,136 @@
+﻿{
+    "$schema":  "http://json-schema.org/draft-07/schema#",
+    "title":  "Arena",
+    "type":  "object",
+    "required":  [
+                     "nodes"
+                 ],
+    "properties":  {
+                       "nodes":  {
+                                     "type":  "array",
+                                     "items":  {
+                                                   "$ref":  "#/definitions/Node"
+                                               }
+                                 }
+                   },
+    "definitions":  {
+                        "Node":  {
+                                     "type":  "object",
+                                     "required":  [
+                                                      "t"
+                                                  ],
+                                     "properties":  {
+                                                        "c":  {
+                                                                  "type":  "array",
+                                                                  "items":  {
+                                                                                "type":  "integer",
+                                                                                "format":  "uint",
+                                                                                "minimum":  0.0
+                                                                            }
+                                                              },
+                                                        "o":  {
+                                                                  "type":  [
+                                                                               "string",
+                                                                               "null"
+                                                                           ]
+                                                              },
+                                                        "r":  {
+                                                                  "type":  [
+                                                                               "string",
+                                                                               "null"
+                                                                           ]
+                                                              },
+                                                        "t":  {
+                                                                  "$ref":  "#/definitions/NodeType"
+                                                              }
+                                                    }
+                                 },
+                        "NodeType":  {
+                                         "oneOf":  [
+                                                       {
+                                                           "type":  "string",
+                                                           "enum":  [
+                                                                        "A",
+                                                                        "M",
+                                                                        "L",
+                                                                        "D"
+                                                                    ]
+                                                       },
+                                                       {
+                                                           "type":  "object",
+                                                           "required":  [
+                                                                            "N"
+                                                                        ],
+                                                           "properties":  {
+                                                                              "N":  {
+                                                                                        "type":  "integer",
+                                                                                        "format":  "int64"
+                                                                                    }
+                                                                          },
+                                                           "additionalProperties":  false
+                                                       },
+                                                       {
+                                                           "type":  "object",
+                                                           "required":  [
+                                                                            "V"
+                                                                        ],
+                                                           "properties":  {
+                                                                              "V":  {
+                                                                                        "type":  "string"
+                                                                                    }
+                                                                          },
+                                                           "additionalProperties":  false
+                                                       },
+                                                       {
+                                                           "type":  "object",
+                                                           "required":  [
+                                                                            "B"
+                                                                        ],
+                                                           "properties":  {
+                                                                              "B":  {
+                                                                                        "type":  "array",
+                                                                                        "items":  [
+                                                                                                      {
+                                                                                                          "type":  "array",
+                                                                                                          "items":  {
+                                                                                                                        "type":  "number",
+                                                                                                                        "format":  "double"
+                                                                                                                    }
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "type":  "integer",
+                                                                                                          "format":  "uint",
+                                                                                                          "minimum":  0.0
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "type":  "integer",
+                                                                                                          "format":  "uint",
+                                                                                                          "minimum":  0.0
+                                                                                                      }
+                                                                                                  ],
+                                                                                        "maxItems":  3,
+                                                                                        "minItems":  3
+                                                                                    }
+                                                                          },
+                                                           "additionalProperties":  false
+                                                       },
+                                                       {
+                                                           "type":  "object",
+                                                           "required":  [
+                                                                            "Q"
+                                                                        ],
+                                                           "properties":  {
+                                                                              "Q":  {
+                                                                                        "type":  "array",
+                                                                                        "items":  {
+                                                                                                      "type":  "number",
+                                                                                                      "format":  "double"
+                                                                                                  }
+                                                                                    }
+                                                                          },
+                                                           "additionalProperties":  false
+                                                       }
+                                                   ]
+                                     }
+                    }
+}

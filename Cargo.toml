@@ -7,5 +7,5 @@ members = [
     "cli",
     "iml-core",
     "iml-translator"
-]
+, "iml-bench"]
 resolver = "2"
