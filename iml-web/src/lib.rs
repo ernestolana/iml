@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 use iml_core::validator::validate_and_parse;
-use checker::check_arena;
-use syntax::{to_human_readable, from_human_readable};
+use iml_checker::check_arena;
+use iml_syntax::{to_human_readable, from_human_readable};
 
 #[wasm_bindgen]
 pub fn validate_ast(json_str: &str) -> Result<String, JsValue> {
@@ -11,7 +11,7 @@ pub fn validate_ast(json_str: &str) -> Result<String, JsValue> {
     }
 
     // 2. Linear DAG and ownership checking
-    let core_arena: core::Arena = match serde_json::from_str(json_str) {
+    let core_arena: iml_core_lib::Arena = match serde_json::from_str(json_str) {
         Ok(a) => a,
         Err(e) => {
             let trace = iml_core::error::ErrorTrace {
@@ -37,7 +37,7 @@ pub fn validate_ast(json_str: &str) -> Result<String, JsValue> {
 
 #[wasm_bindgen]
 pub fn translate_to_human(json_str: &str) -> Result<String, JsValue> {
-    let core_arena: core::Arena = serde_json::from_str(json_str).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    let core_arena: iml_core_lib::Arena = serde_json::from_str(json_str).map_err(|e| JsValue::from_str(&e.to_string()))?;
     Ok(to_human_readable(&core_arena))
 }
 
@@ -50,7 +50,7 @@ pub fn translate_from_human(human_str: &str) -> Result<String, JsValue> {
 
 #[wasm_bindgen]
 pub fn simulate_execution(json_str: &str, fuel_limit: u64) -> Result<String, JsValue> {
-    let core_arena: core::Arena = serde_json::from_str(json_str).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    let core_arena: iml_core_lib::Arena = serde_json::from_str(json_str).map_err(|e| JsValue::from_str(&e.to_string()))?;
     
     let mut fuel = fuel_limit;
     let mut trace = Vec::new();

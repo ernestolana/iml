@@ -13,5 +13,6 @@ serde = { version = "1.0", features = ["derive"] }
 iml-core = { path = "../iml-core" }
 iml-checker = { package = "checker", path = "../checker" }
 iml-syntax = { package = "syntax", path = "../syntax" }
-core = { path = "../core" }
+iml_core_lib = { package = "core", path = "../core" }
+serde_json = "1.0"
 
