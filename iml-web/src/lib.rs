@@ -51,13 +51,29 @@ pub fn simulate_execution(json_str: &str, fuel_limit: u64) -> Result<String, JsV
     let mut fuel = fuel_limit;
     let mut trace = Vec::new();
     
-    for (i, node) in core_arena.nodes.iter().enumerate() {
+    if core_arena.nodes.is_empty() {
+        return Ok("[]".to_string());
+    }
+
+    let mut stack = vec![0];
+    
+    while let Some(idx) = stack.pop() {
         if fuel == 0 {
-            return Err(JsValue::from_str("Trap: Fuel exhaustion"));
+            trace.push("Trap: Fuel exhaustion".to_string());
+            break;
         }
         fuel -= 1;
-        trace.push(format!("Step {}: executed {:?} node", i, node.node_type));
+
+        if let Some(node) = core_arena.nodes.get(idx) {
+            trace.push(format!("Step {}: executed {:?} node", idx, node.node_type));
+            for &child in node.children.iter().rev() {
+                stack.push(child);
+            }
+        } else {
+            trace.push(format!("Trap: Out of bounds reference {}", idx));
+            break;
+        }
     }
     
-    Ok(serde_json::to_string(&trace).map_err(|e| JsValue::from_str(&e.to_string()))?)
+    Ok(serde_json::to_string(&trace).unwrap_or_default())
 }
