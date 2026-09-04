@@ -1,14 +1,10 @@
 use wasm_bindgen::prelude::*;
-use iml_core::validator::validate_and_parse;
 use iml_checker::check_arena;
 use iml_syntax::{to_human_readable, from_human_readable};
 
 #[wasm_bindgen]
 pub fn validate_ast(json_str: &str) -> Result<String, JsValue> {
-    // 1. Core structural/schema validation
-    if let Err(trace) = validate_and_parse(json_str) {
-        return Ok(serde_json::to_string(&trace).unwrap_or_default());
-    }
+    // 1. (Removed conflicting iml_core v2 validator. We rely purely on the legacy v1 core_arena parse below)
 
     // 2. Linear DAG and ownership checking
     let core_arena: iml_core_lib::Arena = match serde_json::from_str(json_str) {
