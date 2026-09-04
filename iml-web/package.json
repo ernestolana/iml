@@ -1,0 +1,7 @@
+{
+  "name": "iml-web",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "wasm-pack build --target web --out-dir ../playground/src/lib/wasm"
+  }
+}

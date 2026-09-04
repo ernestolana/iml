@@ -1,0 +1,44 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Build WebAssembly Bridge
+        run: wasm-pack build --target web --out-dir ../playground/src/lib/wasm
+        working-directory: ./iml-web
+
+      - name: Install Frontend Dependencies
+        run: npm install
+        working-directory: ./playground
+
+      - name: Build Playground Frontend
+        run: npm run build
+        working-directory: ./playground
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_IML_INTERFACE }}'
+          projectId: iml-interface
+          channelId: live

@@ -6,6 +6,8 @@ members = [
     "wasm",
     "cli",
     "iml-core",
-    "iml-translator"
-, "iml-bench"]
+    "iml-translator",
+    "iml-bench",
+    "iml-web"
+]
 resolver = "2"

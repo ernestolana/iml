@@ -1,0 +1,17 @@
+[package]
+name = "iml-web"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde-wasm-bindgen = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+iml-core = { path = "../iml-core" }
+iml-checker = { package = "checker", path = "../checker" }
+iml-syntax = { package = "syntax", path = "../syntax" }
+core = { path = "../core" }
+

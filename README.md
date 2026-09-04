@@ -1,5 +1,8 @@
 # Intelligent Machine Language (IML)
 
+[![Live Interactive Playground](https://img.shields.io/badge/Live-Interactive_Playground-success?style=for-the-badge)](https://iml-interface.web.app)
+
+[**Live Interactive Playground**](https://iml-interface.web.app)
 ## AI-Native Philosophy
 IML is a programming language engineered from the ground up for LLMs and AI agents. It completely discards traditional human-centric lexing, parsing, and syntax in favor of token-dense structural primitives. The entire architecture is optimized for context window efficiency, zero-hallucination semantic parsing, and autonomous agent-to-agent communication.
 
