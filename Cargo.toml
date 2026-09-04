@@ -4,6 +4,8 @@ members = [
     "checker",
     "syntax",
     "wasm",
-    "cli"
+    "cli",
+    "iml-core",
+    "iml-translator"
 ]
 resolver = "2"
