@@ -1,6 +1,14 @@
 <script lang="ts">
     import { presets } from './lib/presets';
-    import { validate_ast, translate_to_human, translate_from_human, simulate_execution } from './lib/wasm/iml_web';
+    import init, { validate_ast, translate_to_human, translate_from_human, simulate_execution } from './lib/wasm/iml_web';
+    import { onMount } from 'svelte';
+
+    let wasmReady = $state(false);
+    onMount(async () => {
+        await init();
+        wasmReady = true;
+        runValidation();
+    });
 
     type PresetKey = keyof typeof presets;
     
@@ -23,7 +31,7 @@
     
     function runValidation() {
         validationResult = validate_ast(astJson);
-        simulationTrace = simulate_execution(astJson, 100);
+        simulationTrace = simulate_execution(astJson, 100n);
     }
     
     $effect(() => {
