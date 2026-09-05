@@ -1,0 +1,54 @@
+{
+  "_comment_ast": "The Machine-Native AST: A flat array utilizing highly compressed single-character keys ('t' for type, 'c' for children indices, 'r' for human rationale, 'o' for ownership bindings). Node 0 allocates the solver. Node 1 defines the grid state tensor. Node 2 multiplies them. Node 3 drops the solver to satisfy the strict linear memory checker.",
+  "machine_native_ast": {
+    "nodes": [
+      {
+        "t": {
+          "L": null
+        },
+        "c": [],
+        "r": "Allocate Wasm thermodynamic solver",
+        "o": "solver_resource"
+      },
+      {
+        "t": {
+          "B": [
+            [
+              1.2,
+              0.5,
+              0.9,
+              1.1
+            ],
+            2,
+            2
+          ]
+        },
+        "c": [],
+        "r": "Grid state tensor"
+      },
+      {
+        "t": {
+          "M": null
+        },
+        "c": [
+          0,
+          1
+        ],
+        "r": "Calculate stabilization delta"
+      },
+      {
+        "t": {
+          "D": null
+        },
+        "c": [
+          0
+        ],
+        "r": "Drop thermodynamic solver to free memory"
+      }
+    ]
+  },
+  "_comment_overlay": "The Semantic Overlay: This is the bidirectionally compiled plain English projection of the AST. It allows human engineers to read, debug, and edit the machine-generated graph linearly without parsing JSON brackets.",
+  "semantic_overlay": "0: Alloc\n1: AlgebraicMatrix(2x2)\n2: Mul -> 0, 1\n3: Drop -> 0",
+  "_comment_sandbox": "The Sandbox Output: Demonstrates the simulated deterministic execution trace. It explicitly steps through the nodes, respects the resource drop, and tracks the bounded execution fuel to prevent hallucination hangs.",
+  "sandbox_output": "Step 0: executed Alloc node\nStep 1: executed AlgebraicMatrix([1.2, 0.5, 0.9, 1.1], 2, 2) node\nStep 2: executed Mul node (Stabilization delta calculated)\nStep 3: executed Drop node\n\n[SUCCESS] Execution complete. Final stabilization delta applied. (Fuel remaining: 96)"
+}

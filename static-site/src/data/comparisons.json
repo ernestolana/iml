@@ -1,0 +1,38 @@
+{
+  "python": {
+    "name": "Python 3.12",
+    "description": "Verbose, human-centric logic using standard mathematical libraries.",
+    "code": "import numpy as np\nfrom solver import WasmSolver\n\ndef stabilize_power(grid_state):\n    solver = WasmSolver.allocate()\n    try:\n        tensor = np.array(grid_state).reshape((2, 2))\n        return solver.multiply(tensor)\n    finally:\n        solver.free()",
+    "metrics": {
+      "tokens": 57,
+      "bytes": 254
+    }
+  },
+  "rust": {
+    "name": "Rust",
+    "description": "Strict, compiled logic with explicit memory handling.",
+    "code": "use ndarray::Array2;\nuse solver::WasmSolver;\n\nfn stabilize_power(grid_state: Vec<f64>) -> Result<Array2<f64>, Error> {\n    let solver = WasmSolver::allocate()?;\n    let tensor = Array2::from_shape_vec((2, 2), grid_state)?;\n    let result = solver.multiply(&tensor);\n    drop(solver);\n    Ok(result)\n}",
+    "metrics": {
+      "tokens": 81,
+      "bytes": 300
+    }
+  },
+  "verbose_json": {
+    "name": "Verbose JSON AST",
+    "description": "A deeply nested recursive JSON tree simulating a standard Agent framework target.",
+    "code": "{\n  \"type\": \"Program\",\n  \"body\": [\n    {\n      \"type\": \"VariableDeclaration\",\n      \"declarations\": [\n        {\n          \"type\": \"VariableDeclarator\",\n          \"id\": { \"type\": \"Identifier\", \"name\": \"solver\" },\n          \"init\": {\n            \"type\": \"CallExpression\",\n            \"callee\": { \"type\": \"Identifier\", \"name\": \"allocate_solver\" },\n            \"arguments\": []\n          }\n        }\n      ],\n      \"kind\": \"let\"\n    },\n    {\n      \"type\": \"VariableDeclaration\",\n      \"declarations\": [\n        {\n          \"type\": \"VariableDeclarator\",\n          \"id\": { \"type\": \"Identifier\", \"name\": \"tensor\" },\n          \"init\": {\n            \"type\": \"CallExpression\",\n            \"callee\": { \"type\": \"Identifier\", \"name\": \"AlgebraicMatrix\" },\n            \"arguments\": [\n              {\n                \"type\": \"ArrayExpression\",\n                \"elements\": [\n                  { \"type\": \"Literal\", \"value\": 1.2 },\n                  { \"type\": \"Literal\", \"value\": 0.5 },\n                  { \"type\": \"Literal\", \"value\": 0.9 },\n                  { \"type\": \"Literal\", \"value\": 1.1 }\n                ]\n              },\n              { \"type\": \"Literal\", \"value\": 2 },\n              { \"type\": \"Literal\", \"value\": 2 }\n            ]\n          }\n        }\n      ],\n      \"kind\": \"let\"\n    },\n    {\n      \"type\": \"ExpressionStatement\",\n      \"expression\": {\n        \"type\": \"CallExpression\",\n        \"callee\": { \"type\": \"Identifier\", \"name\": \"multiply\" },\n        \"arguments\": [\n          { \"type\": \"Identifier\", \"name\": \"solver\" },\n          { \"type\": \"Identifier\", \"name\": \"tensor\" }\n        ]\n      }\n    },\n    {\n      \"type\": \"ExpressionStatement\",\n      \"expression\": {\n        \"type\": \"CallExpression\",\n        \"callee\": { \"type\": \"Identifier\", \"name\": \"drop\" },\n        \"arguments\": [\n          { \"type\": \"Identifier\", \"name\": \"solver\" }\n        ]\n      }\n    }\n  ]\n}",
+    "metrics": {
+      "tokens": 476,
+      "bytes": 1862
+    }
+  },
+  "slop": {
+    "name": "SLOP / S-Expressions",
+    "description": "S-expressions mirroring Lisp for minimal parsing, but often suffering from agentic hallucinations.",
+    "code": "(def-stabilizer microgrid\n  (bind solver (alloc-wasm-solver))\n  (bind tensor (matrix 2 2 (list 1.2 0.5 0.9 1.1)))\n  (bind result (mul solver tensor))\n  (drop solver)\n  result)",
+    "metrics": {
+      "tokens": 64,
+      "bytes": 175
+    }
+  }
+}
