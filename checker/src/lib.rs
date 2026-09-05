@@ -9,6 +9,24 @@ pub enum CheckerError {
     DoubleConsume(NodeIndex),
 }
 
+impl std::fmt::Display for CheckerError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CheckerError::OutOfBounds(idx) => write!(f, "OutOfBounds({})", idx),
+            CheckerError::CycleDetected(idx) => write!(f, "CycleDetected({})", idx),
+            CheckerError::DoubleConsume(idx) => write!(f, "DoubleConsume({})", idx),
+            CheckerError::UnconsumedResource(idx) => {
+                write!(f, "UnconsumedResource({})\n", idx)?;
+                write!(f, "╭─[ Allocation Node {} ]\n", idx)?;
+                write!(f, "│\n")?;
+                write!(f, "│  ⚠️  Resource allocated here but never dropped.\n")?;
+                write!(f, "│\n")?;
+                write!(f, "╰─> [ Expected Drop Node ] (Missing)")
+            }
+        }
+    }
+}
+
 pub fn check_arena(arena: &Arena) -> Result<(), CheckerError> {
     let mut visited = HashSet::new();
     let mut stack = HashSet::new();

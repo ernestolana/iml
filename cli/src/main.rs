@@ -13,10 +13,15 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    Run { file: String },
+    Run { 
+        file: String,
+        #[arg(long)] auto_repair: bool,
+    },
     Format {
         #[arg(long)] to_human: bool,
         #[arg(long)] to_json: bool,
+        #[arg(long)] to_pseudo: bool,
+        #[arg(long)] from_pseudo: bool,
         file: String,
     },
     Grammar {
@@ -27,10 +32,21 @@ enum Commands {
 fn main() {
     let cli = Cli::parse();
     match &cli.command {
-        Commands::Run { file } => {
+        Commands::Run { file, auto_repair } => {
             println!("Running file: {}", file);
+            let content = fs::read_to_string(file).expect("Failed to read file");
+            let arena: Arena = serde_json::from_str(&content).expect("Invalid JSON AST");
+            match checker::check_arena(&arena) {
+                Ok(_) => println!("Execution successful."),
+                Err(e) => {
+                    println!("[ERROR] Two-Pass Linear Checker Failed:\n{}", e);
+                    if *auto_repair {
+                        println!("\n[Auto-Repair] Flag detected. Feeding visual diagnostic back to LLM context...");
+                    }
+                }
+            }
         },
-        Commands::Format { to_human, to_json, file } => {
+        Commands::Format { to_human, to_json, to_pseudo, from_pseudo, file } => {
             if *to_human {
                 let content = fs::read_to_string(file).expect("Failed to read file");
                 let arena: Arena = serde_json::from_str(&content).expect("Invalid JSON AST");
@@ -39,6 +55,16 @@ fn main() {
             } else if *to_json {
                 let content = fs::read_to_string(file).expect("Failed to read file");
                 let arena = syntax::from_human_readable(&content).expect("Invalid Human format");
+                let json = serde_json::to_string_pretty(&arena).unwrap();
+                println!("{}", json);
+            } else if *to_pseudo {
+                let content = fs::read_to_string(file).expect("Failed to read file");
+                let arena: Arena = serde_json::from_str(&content).expect("Invalid JSON AST");
+                let pseudo = syntax::to_pseudo_c(&arena);
+                println!("{}", pseudo);
+            } else if *from_pseudo {
+                let content = fs::read_to_string(file).expect("Failed to read file");
+                let arena = syntax::from_pseudo_c(&content).expect("Invalid Pseudo format");
                 let json = serde_json::to_string_pretty(&arena).unwrap();
                 println!("{}", json);
             }

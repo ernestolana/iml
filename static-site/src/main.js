@@ -154,12 +154,21 @@ function init() {
 
           <!-- Correlated JSON Code -->
           <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-              Machine-Native AST
+            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                Machine-Native AST
+              </div>
+              <button id="toggle-pseudo" class="text-xs bg-slate-800 text-slate-400 hover:text-white px-3 py-1 rounded transition-colors border border-slate-700">Toggle C-Style</button>
             </h4>
             <div class="flex-1 bg-[#1d1f21] rounded-xl overflow-hidden relative border border-slate-800">
-               <pre class="h-full w-full overflow-auto p-4 m-0"><code class="language-json" id="hover-sync-json">${imlAstRendered}</code></pre>
+               <pre class="h-full w-full overflow-auto p-4 m-0" id="pre-json"><code class="language-json" id="hover-sync-json">${imlAstRendered}</code></pre>
+               <pre class="h-full w-full overflow-auto p-4 m-0 hidden" id="pre-pseudo"><code class="language-c" id="hover-sync-pseudo">void iml_main() {
+    let n0 = Alloc(); // Allocate thermodynamic power grid solver component...
+    let n1 = AlgebraicMatrix(2x2); // Initialize 2x2 grid state tensor...
+    let n2 = Mul(n0, n1); // Execute matrix stabilization...
+    let n3 = Drop(n0); // Explicitly drop thermodynamic solver handle...
+}</code></pre>
             </div>
           </div>
         </div>
@@ -361,6 +370,24 @@ function setupTabs() {
 }
 
 function setupHoverSync() {
+  const toggleBtn = document.getElementById('toggle-pseudo');
+  const preJson = document.getElementById('pre-json');
+  const prePseudo = document.getElementById('pre-pseudo');
+  
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (preJson.classList.contains('hidden')) {
+        preJson.classList.remove('hidden');
+        prePseudo.classList.add('hidden');
+        toggleBtn.textContent = 'Toggle C-Style';
+      } else {
+        preJson.classList.add('hidden');
+        prePseudo.classList.remove('hidden');
+        toggleBtn.textContent = 'Toggle JSON';
+      }
+    });
+  }
+
   // Sync logic for Hover & Touch
   const steps = document.querySelectorAll('.semantic-step');
   
@@ -488,7 +515,7 @@ function setupSVGSimulator(successTrace) {
     pathLeak.setAttribute('opacity', '1');
     textLeak.setAttribute('opacity', '1');
 
-    traceOutput.innerHTML = "[ERROR] Two-Pass Linear Checker Failed.<br>UnconsumedResource(0): Node 0 was allocated but never explicitly dropped.<br><br>Agent halted before runtime.";
+    traceOutput.innerHTML = "[ERROR] Two-Pass Linear Checker Failed.<br>UnconsumedResource(0)<br>╭─[ Allocation Node 0 ]<br>│<br>│  ⚠️  Resource allocated here but never dropped.<br>│<br>╰─&gt; [ Expected Drop Node ] (Missing)<br><br>Agent halted before runtime.";
     traceOutput.className = "text-rose-400 whitespace-pre-wrap";
   });
 
