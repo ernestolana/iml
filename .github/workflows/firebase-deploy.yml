@@ -17,23 +17,13 @@ jobs:
         with:
           node-version: 20
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Install wasm-pack
-        uses: jetli/wasm-pack-action@v0.4.0
-
-      - name: Build WebAssembly Bridge
-        run: wasm-pack build --target web --out-dir ../playground/src/lib/wasm
-        working-directory: ./iml-web
-
       - name: Install Frontend Dependencies
         run: npm install
-        working-directory: ./playground
+        working-directory: ./static-site
 
       - name: Build Playground Frontend
         run: npm run build
-        working-directory: ./playground
+        working-directory: ./static-site
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0

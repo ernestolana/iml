@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "playground/dist",
+    "public": "static-site/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

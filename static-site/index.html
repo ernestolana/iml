@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IML - Intermediate Machine Language</title>
+    <link href="/src/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-slate-950 text-slate-200 antialiased font-sans selection:bg-cyan-500/30">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          IML Showcase
+        </div>
+        <div class="flex gap-6 text-sm font-medium text-slate-400">
+          <a href="#bottleneck" class="hover:text-cyan-400 transition-colors">The Bottleneck</a>
+          <a href="#solution" class="hover:text-cyan-400 transition-colors">Dual-State</a>
+          <a href="#benchmarks" class="hover:text-cyan-400 transition-colors">Benchmarks</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="py-32 px-4 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-950 to-slate-950"></div>
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
+          Code for <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Machines</span>,<br /> Not Humans.
+        </h1>
+        <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          The Intermediate Machine Language (IML) revolutionizes agentic code generation. It discards token-heavy human syntax in favor of a hyper-compressed, deterministic bytecode AST designed specifically for LLM token economies.
+        </p>
+        <a href="#benchmarks" class="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+          View the Benchmarks
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </a>
+      </div>
+    </header>
+
+    <div id="app"></div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js"></script>
+  </body>
+</html>

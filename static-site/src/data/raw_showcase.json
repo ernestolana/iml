@@ -1,0 +1,24 @@
+{
+  "iml": {
+    "name": "IML (Machine AST + Overlay)",
+    "ast": "{\"nodes\":[{\"t\":{\"L\":null},\"c\":[],\"r\":\"Allocate Wasm solver\",\"o\":\"mem1\"},{\"t\":{\"V\":\"grid_state\"},\"c\":[],\"r\":\"Read sensor tensor\"},{\"t\":{\"M\":null},\"c\":[0,1],\"r\":\"Stabilize power calculation\"},{\"t\":{\"D\":null},\"c\":[0],\"r\":\"Free solver memory\"}]}",
+    "overlay": "0: Alloc\n1: Var(grid_state)\n2: Mul -> 0, 1\n3: Drop -> 0",
+    "trace": "Step 0: executed Alloc node\nStep 1: executed Var(\"grid_state\") node\nStep 2: executed Mul node\nStep 3: executed Drop node"
+  },
+  "python": {
+    "name": "Python 3.12",
+    "code": "def stabilize_power(grid_state):\n    solver = WasmSolver()\n    try:\n        return solver.calculate(grid_state)\n    finally:\n        solver.free()"
+  },
+  "rust": {
+    "name": "Rust",
+    "code": "fn stabilize_power(grid_state: Tensor) -> Result<Tensor, Error> {\n    let solver = WasmSolver::new();\n    let result = solver.calculate(grid_state);\n    drop(solver);\n    Ok(result)\n}"
+  },
+  "verbose_json": {
+    "name": "Verbose JSON AST",
+    "code": "{\n  \"type\": \"Program\",\n  \"body\": [\n    {\n      \"type\": \"VariableDeclaration\",\n      \"declarations\": [\n        {\n          \"type\": \"VariableDeclarator\",\n          \"id\": {\n            \"type\": \"Identifier\",\n            \"name\": \"solver\"\n          },\n          \"init\": {\n            \"type\": \"CallExpression\",\n            \"callee\": {\n              \"type\": \"Identifier\",\n              \"name\": \"WasmSolver\"\n            }\n          }\n        }\n      ],\n      \"kind\": \"let\"\n    },\n    {\n      \"type\": \"ExpressionStatement\",\n      \"expression\": {\n        \"type\": \"CallExpression\",\n        \"callee\": {\n          \"type\": \"MemberExpression\",\n          \"object\": {\n            \"type\": \"Identifier\",\n            \"name\": \"solver\"\n          },\n          \"property\": {\n            \"type\": \"Identifier\",\n            \"name\": \"calculate\"\n          }\n        },\n        \"arguments\": [\n          {\n            \"type\": \"Identifier\",\n            \"name\": \"grid_state\"\n          }\n        ]\n      }\n    },\n    {\n      \"type\": \"ExpressionStatement\",\n      \"expression\": {\n        \"type\": \"CallExpression\",\n        \"callee\": {\n          \"type\": \"Identifier\",\n          \"name\": \"drop\"\n        },\n        \"arguments\": [\n          {\n            \"type\": \"Identifier\",\n            \"name\": \"solver\"\n          }\n        ]\n      }\n    }\n  ]\n}"
+  },
+  "slop": {
+    "name": "SLOP / S-Expressions",
+    "code": "(def-task stabilize_power\n  (bind solver (alloc WasmSolver))\n  (bind result (mul solver grid_state))\n  (drop solver)\n  result)"
+  }
+}

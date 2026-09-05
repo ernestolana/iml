@@ -96,29 +96,17 @@ IML ASTs are natively executed in a highly constrained `wasmtime` Component Mode
 | Rust (Native) | Baseline (0%) | N/A (Hangs indefinitely) | OS Interrupt |
 
 
-## 🎮 Live Interactive Playground
+## 📊 Architectural Showcase & Benchmarks
 
-[![Live Interactive Playground](https://img.shields.io/badge/Live-Interactive_Playground-success?style=for-the-badge)](https://iml-interface.web.app)
+The [Live Showcase](https://iml-interface.web.app) provides a comprehensive breakdown of the dual-state architecture and visual comparisons between IML and traditional syntax formats.
 
-Experience the dual-state architecture of IML firsthand in your browser via our [**Live Interactive Playground**](https://iml-interface.web.app). The playground runs our Rust-based `iml-web` Wasm bridge entirely client-side, giving you real-time feedback with zero backend dependencies.
+### Core Benchmark: Microgrid Power Stabilization
+| Language / Format | Byte Size | Tokens (cl100k) | AI Generation Cost |
+| :--- | :--- | :--- | :--- |
+| **IML (Machine AST)** | **198 B** | **59** | **Lowest** |
+| Verbose JSON AST | 1,029 B | 275 | ~4.6x more |
+| Rust | 158 B | 49 | Fast, but unconstrained |
+| Python 3.12 | 134 B | 36 | Fast, but hallucinates |
+| SLOP / S-Expressions | 129 B | 45 | Too ambiguous |
 
-### How to Use It
-The playground is split into a 3-column IDE layout:
-1. **Semantic English Overlay (Left)**: This is the human-readable representation of the AST. It translates the raw index-based graph into sequential operations.
-2. **Machine-Native AST Arena (Center)**: This is the raw JSON schema utilizing ultra-terse keys (`t`, `c`, `r`, `o`). This is exactly what an LLM agent outputs.
-3. **Diagnostics & Runtime (Right)**: Here you'll see the live output from our strict Two-Pass Linear Type Checker and the Sandboxed Execution Engine. 
-
-When you type in the AST Arena or the Semantic Overlay, the playground instantly cross-compiles and validates your changes on every keystroke. 
-
-### Things to Try
-Load the pre-configured presets using the dropdown toolbar, and try these modifications:
-
-* **Robotic Trajectory Task**
-  * *Try this*: Delete the `Drop` node in the Semantic English overlay.
-  * *What to expect*: The Machine-Native AST will instantly update, and the Diagnostics panel will throw a `RepairError` trace (e.g. an `UnconsumedResource` or a missing reference), mimicking the exact constrained feedback loop an LLM receives.
-* **Quantum State Matrix**
-  * *Try this*: In the Machine-Native AST Arena, duplicate the index `2` reference in the `Drop` node's children (`"c": [2, 2]`).
-  * *What to expect*: The linear type checker will trap it and throw a `DoubleConsume(2)` error, guaranteeing memory safety for resources.
-* **Infinite Loop Trap**
-  * *Try this*: Select this preset to run code that points to itself (`0: Add -> 0`).
-  * *What to expect*: The execution engine immediately traps the execution via deterministic fuel exhaustion (`Trap: Fuel exhaustion`) rather than hanging your browser, demonstrating how agentic hallucination loops are safely mitigated.
+*Note: IML strikes the perfect balance by retaining the strict deterministic qualities of a raw syntax tree, while heavily compressing the keys and structures to respect the AI token economy.*
