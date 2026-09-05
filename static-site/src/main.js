@@ -9,7 +9,12 @@ function init() {
   const verbose = data.comparisons.verbose_json;
   const slop = data.comparisons.slop;
 
-  const competitors = [python, rust, verbose, slop];
+  const competitors = [
+    { ...python, id: 'python' },
+    { ...rust, id: 'rust' },
+    { ...verbose, id: 'verbose' },
+    { ...slop, id: 'slop' }
+  ];
 
   // Pre-formatted AST as requested
   const imlAstRendered = iml.ast;

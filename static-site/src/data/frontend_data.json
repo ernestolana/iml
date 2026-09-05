@@ -12,19 +12,19 @@
   "comparisons": {
     "python": {
       "name": "Python 3.12",
-      "code": "import numpy as np\nfrom solver import WasmSolver\n\ndef stabilize_power(grid_state):\n    solver = WasmSolver.allocate()\n    try:\n        tensor = np.array(grid_state).reshape((2, 2))\n        return solver.multiply(tensor)\n    finally:\n        solver.free()",
+      "code": "import numpy as np\nfrom solver import WasmSolver\n\ndef stabilize_power():\n    solver = WasmSolver.allocate()\n    try:\n        tensor = np.array([1.2, 0.5, 0.9, 1.1]).reshape((2, 2))\n        return solver.multiply(tensor)\n    finally:\n        solver.free()",
       "metrics": {
-        "tokens": 78,
+        "tokens": 72,
         "bytes": 254
       },
       "risk": "High (Syntax Errors, Indentation, Missing imports, Unclosed resources)"
     },
     "rust": {
       "name": "Rust",
-      "code": "use ndarray::Array2;\nuse solver::WasmSolver;\n\nfn stabilize_power(grid_state: Vec<f64>) -> Result<Array2<f64>, Error> {\n    let solver = WasmSolver::allocate()?;\n    let tensor = Array2::from_shape_vec((2, 2), grid_state)?;\n    let result = solver.multiply(&tensor);\n    drop(solver);\n    Ok(result)\n}",
+      "code": "use ndarray::Array2;\nuse solver::WasmSolver;\n\nfn stabilize_power() -> Result<Array2<f64>, Error> {\n    let solver = WasmSolver::allocate()?;\n    let tensor = Array2::from_shape_vec((2, 2), vec![1.2, 0.5, 0.9, 1.1])?;\n    let result = solver.multiply(&tensor);\n    drop(solver);\n    Ok(result)\n}",
       "metrics": {
         "tokens": 94,
-        "bytes": 310
+        "bytes": 294
       },
       "risk": "Medium (Borrow checker failures, lifetime mismatches, strict types)"
     },
