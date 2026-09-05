@@ -1,8 +1,16 @@
 use wasmtime::*;
 
+#[derive(Default, Clone)]
+pub struct WasiPermissions {
+    pub allow_network: bool,
+    pub allow_env: bool,
+    pub allowed_directories: Vec<std::path::PathBuf>,
+}
+
 pub struct SandboxConfig {
     pub fuel_limit: u64,
     pub max_memory_bytes: usize,
+    pub wasi_permissions: WasiPermissions,
 }
 
 impl Default for SandboxConfig {
@@ -10,6 +18,7 @@ impl Default for SandboxConfig {
         Self {
             fuel_limit: 100_000_000,
             max_memory_bytes: 10 * 1024 * 1024, // 10 MB
+            wasi_permissions: WasiPermissions::default(),
         }
     }
 }
@@ -28,6 +37,15 @@ impl WasmSandbox {
         
         let engine = Engine::new(&wasm_config)?;
         Ok(Self { engine, config })
+    }
+
+    pub fn compile_aot(&self, wasm_bytes: &[u8]) -> anyhow::Result<Vec<u8>> {
+        let module = Module::new(&self.engine, wasm_bytes)?;
+        module.serialize()
+    }
+
+    pub fn load_aot(&self, serialized_bytes: &[u8]) -> anyhow::Result<Module> {
+        unsafe { Module::deserialize(&self.engine, serialized_bytes) }
     }
 
     pub fn engine(&self) -> &Engine {
