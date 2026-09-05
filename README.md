@@ -1,7 +1,7 @@
 # Intelligent Machine Language (IML)
 
 ## AI-Native Philosophy
-IML is a programming language engineered from the ground up for LLMs and AI agents. It completely discards traditional human-centric lexing, parsing, and syntax in favor of token-dense structural primitives. The entire architecture is optimized for context window efficiency, zero-hallucination semantic parsing, and autonomous agent-to-agent communication.
+IML is a programming language engineered from the ground up for LLMs and AI agents. It completely discards traditional human-centric lexing, parsing, and syntax in favor of token-dense structural primitives. The entire architecture is optimized for context window efficiency, Provable Resource Bounds and Deterministic Sandboxing, and autonomous agent-to-agent communication.
 
 ## Where to Start
 
