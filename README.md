@@ -116,3 +116,7 @@ Explore the live environment at: [https://iml-interface.web.app](https://iml-int
 | Verbose JSON AST | 480 B | 142 | ~9.5x more |
 
 *Note: IML strikes the perfect balance by retaining the strict deterministic qualities of a raw syntax tree, while heavily compressing the keys and structures to respect the AI token economy.*
+
+## License
+
+IML is open-source and free to use, share, and commercialize. It is dual-licensed under the terms of both the [MIT License](LICENSE-MIT) and the [Apache License (Version 2.0)](LICENSE-APACHE).
