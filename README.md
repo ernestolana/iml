@@ -1,5 +1,8 @@
 # Intelligent Machine Language (IML)
 
+> **🤖 Are you an AI Agent?** 
+> If you have been asked to write, debug, or interpret IML code, you must first read the [Agent Instructions](docs/AGENT_INSTRUCTIONS.md). This file contains the exact JSON schema, linear typing rules, and operational constraints required to generate valid IML bytecode and avoid hallucinations.
+
 ## AI-Native Philosophy
 IML is a programming language engineered from the ground up for LLMs and AI agents. It completely discards traditional human-centric lexing, parsing, and syntax in favor of token-dense structural primitives. The entire architecture is optimized for context window efficiency, provable resource bounds and deterministic sandboxing, and autonomous agent-to-agent communication.
 
