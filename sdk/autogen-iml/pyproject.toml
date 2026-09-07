@@ -7,7 +7,7 @@ name = "autogen-iml"
 version = "0.1.0"
 description = "Official AutoGen SDK integration for IML"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{name = "IML Team", email = "team@iml-lang.org"}]
 classifiers = [
     "Programming Language :: Python :: 3",

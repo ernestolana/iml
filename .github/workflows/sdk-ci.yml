@@ -13,6 +13,9 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
         sdk: ["langchain-iml", "gemini-iml", "autogen-iml"]
+        exclude:
+          - python-version: "3.9"
+            sdk: "autogen-iml"
 
     steps:
     - uses: actions/checkout@v4
