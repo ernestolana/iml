@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {
+      "t": "T",
+      "c": [],
+      "r": "Define matrix",
+      "a": [[1.2, 0.5], [0.9, 1.1]]
+    },
+    {
+      "t": "V",
+      "c": [],
+      "r": "Define scalar",
+      "a": 2.0
+    },
+    {
+      "t": "C",
+      "c": [0, 1],
+      "r": "Compute arithmetic"
+    }
+  ]
+}

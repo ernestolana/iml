@@ -1,0 +1,10 @@
+{
+  "nodes": [
+    {
+      "t": "L",
+      "c": [],
+      "r": "Allocate host resource",
+      "o": "solver_handle"
+    }
+  ]
+}

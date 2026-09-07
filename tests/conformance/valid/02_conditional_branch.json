@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {
+      "t": "V",
+      "c": [],
+      "r": "Define condition",
+      "a": true
+    },
+    {
+      "t": "V",
+      "c": [],
+      "r": "True branch value",
+      "a": 1
+    },
+    {
+      "t": "V",
+      "c": [],
+      "r": "False branch value",
+      "a": 0
+    },
+    {
+      "t": "B",
+      "c": [0, 1, 2],
+      "r": "Branch on condition"
+    }
+  ]
+}

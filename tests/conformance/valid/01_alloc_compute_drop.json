@@ -1,0 +1,26 @@
+{
+  "nodes": [
+    {
+      "t": "L",
+      "c": [],
+      "r": "Allocate host resource",
+      "o": "solver_handle"
+    },
+    {
+      "t": "V",
+      "c": [],
+      "r": "Define parameter",
+      "a": 42
+    },
+    {
+      "t": "C",
+      "c": [0, 1],
+      "r": "Compute using solver"
+    },
+    {
+      "t": "D",
+      "c": [0],
+      "r": "Drop resource"
+    }
+  ]
+}

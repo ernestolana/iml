@@ -18,24 +18,23 @@ IML is designed to be edited via a bidirectional semantic overlay powered by a S
 
 ## Step 2: Write Your First IML Program
 
-In the Svelte UI editor, type the following readable text block:
-
-```text
-module main:
-  print "Hello, IML Sandbox!"
-```
-
-The UI automatically translates this down into IML's ultra-terse machine-state JSON in real-time. 
+In the Svelte UI editor, you construct programs using a flat array of nodes. We will define a sequence that declares a constant value (`V`) and prints it (`P`).
 
 Click **Save to Workspace** or manually copy the generated JSON into a new file called `src/agent_logic.json`:
 
 ```json
 {
-  "t": "module",
-  "c": [
+  "nodes": [
     {
-      "t": "print",
-      "o": "Hello, IML Sandbox!"
+      "t": "V",
+      "c": [],
+      "r": "Define a string constant",
+      "a": "Hello, IML Sandbox!"
+    },
+    {
+      "t": "P",
+      "c": [0],
+      "r": "Print the string constant to standard output"
     }
   ]
 }
@@ -51,7 +50,7 @@ Run the following command from your workspace root:
 iml format --to-human src/agent_logic.json
 ```
 
-*Expected output:* You should see the natural language block from Step 2 printed in your terminal.
+*Expected output:* You should see the natural language rationale printed in your terminal.
 
 ## Step 4: Execute in the Wasm Sandbox
 

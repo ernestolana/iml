@@ -6,7 +6,7 @@ from langchain_core.tools import tool
 from typing import List, Dict, Any
 
 @tool
-def execute_iml_sandbox(ast: List[Dict[str, Any]]) -> str:
+def execute_iml_sandbox(ast: Dict[str, Any]) -> str:
     """Executes the given IML AST in the local wasm sandbox or returns a RepairError trace."""
     
     with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:

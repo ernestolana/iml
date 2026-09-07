@@ -3,10 +3,10 @@ from typing import Any, Dict, List
 from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import BaseOutputParser
 
-class IMLOutputParser(BaseOutputParser[List[Dict[str, Any]]]):
+class IMLOutputParser(BaseOutputParser[Dict[str, Any]]):
     """Parses LLM output into the ultra-terse IML JSON Schema."""
     
-    def parse(self, text: str) -> List[Dict[str, Any]]:
+    def parse(self, text: str) -> Dict[str, Any]:
         try:
             # Simple extraction if LLM outputs markdown block
             text = text.strip()
@@ -18,8 +18,8 @@ class IMLOutputParser(BaseOutputParser[List[Dict[str, Any]]]):
                 text = text[:-3]
             
             parsed = json.loads(text.strip())
-            if not isinstance(parsed, list):
-                raise ValueError("IML AST must be a JSON array")
+            if not isinstance(parsed, dict) or "nodes" not in parsed:
+                raise ValueError("IML AST must be a JSON object with a 'nodes' array")
                 
             return parsed
         except json.JSONDecodeError as e:

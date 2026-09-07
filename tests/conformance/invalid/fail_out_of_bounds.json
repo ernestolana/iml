@@ -1,0 +1,10 @@
+{
+  "nodes": [
+    {
+      "t": "V",
+      "c": [5],
+      "r": "Referencing index out of bounds",
+      "a": 42
+    }
+  ]
+}

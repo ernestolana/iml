@@ -63,7 +63,7 @@ fn main() {
     println!("=== Semantic Translation (Human Rationale) ===\n{}\n", human);
     
     // Step 5: Deterministic Sandboxing
-    let sandbox_config = SandboxConfig { fuel_limit: 500, max_memory_bytes: 10 * 1024 * 1024 };
+    let sandbox_config = SandboxConfig { fuel_limit: 500, max_memory_bytes: 10 * 1024 * 1024, wasi_permissions: Default::default() };
     let _sandbox = WasmSandbox::new(sandbox_config).unwrap();
     println!("=== Wasm Execution Trace ===\n[Trace] Initializing Sandbox with strict SandboxConfig (500 fuel limit)...\n[Trace] Loading Wasm Component...\n[Trace] Fuel consumed: 0/500\n[Trace] Executing Node 0: Num(10)\n[Trace] Executing Node 1: Alloc(0) -> assigned ownership: res1\n[Trace] Executing Node 2: Var(\"complex_math_op\") with args [res1]\n[Trace]   >> Sandbox call complex_math_op(10)...\n[Trace]   << Returned: 10\n[Trace] Executing Node 3: Drop(1) -> dropped ownership: res1\n[Trace] Execution completed successfully.\n[Trace] Total fuel consumed: 42 instructions.\n");
 }
