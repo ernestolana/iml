@@ -120,6 +120,25 @@ Explore the live environment at: [https://iml-interface.web.app](https://iml-int
 
 *Note: IML strikes the perfect balance by retaining the strict deterministic qualities of a raw syntax tree, while heavily compressing the keys and structures to respect the AI token economy.*
 
+## Native Agent Integrations
+
+IML provides an official SDK for LangChain and LangGraph to streamline agentic adoption, handling generation, validation, and self-repair loops automatically.
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain_iml import create_iml_repair_loop
+
+llm = ChatOpenAI(model="gpt-4o")
+graph = create_iml_repair_loop(llm, max_retries=3)
+
+result = graph.invoke({
+    "task": "Create a Fibonacci sequence in IML",
+    "errors": 0,
+    "messages": []
+})
+print(result["execution_result"])
+```
+
 ## License
 
 IML is open-source and free to use, share, and commercialize. It is dual-licensed under the terms of both the [MIT License](LICENSE-MIT) and the [Apache License (Version 2.0)](LICENSE-APACHE).
