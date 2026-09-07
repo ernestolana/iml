@@ -1,7 +1,7 @@
 # Intelligent Machine Language (IML)
 
 > **🤖 Are you an AI Agent?** 
-> If you have been asked to write, debug, or interpret IML code, you must first read the [Agent Instructions](docs/AGENT_INSTRUCTIONS.md). This file contains the exact JSON schema, linear typing rules, and operational constraints required to generate valid IML bytecode and avoid hallucinations. You can also utilize the official `langchain-iml` SDK to automate generation, validation, and self-repair loops.
+> If you have been asked to write, debug, or interpret IML code, you must first read the instructions specific to your framework: [LangChain](docs/LANGCHAIN_AGENT_INSTRUCTIONS.md), [Google GenAI](docs/GEMINI_AGENT_INSTRUCTIONS.md), or [AutoGen](docs/AUTOGEN_AGENT_INSTRUCTIONS.md). These files contain the exact JSON schema, linear typing rules, and operational constraints required to generate valid IML bytecode and avoid hallucinations. You can also utilize the official SDKs (`langchain-iml`, `gemini-iml`, `autogen-iml`) to automate generation, validation, and self-repair loops.
 
 ## AI-Native Philosophy
 IML is a programming language engineered from the ground up for LLMs and AI agents. It completely discards traditional human-centric lexing, parsing, and syntax in favor of token-dense structural primitives. The entire architecture is optimized for context window efficiency, provable resource bounds and deterministic sandboxing, and autonomous agent-to-agent communication.
@@ -149,6 +149,24 @@ from gemini_iml import IMLAgent
 agent = IMLAgent(model_name="gemini-2.5-pro")
 result = agent.execute_task("Create a Fibonacci sequence in IML", max_retries=3)
 print(result)
+```
+
+### AutoGen (Multi-Agent Swarm)
+
+Integrate IML seamlessly into AutoGen 0.4+ swarms using the official `autogen-iml` SDK. It provides an `AssistantAgent` factory and `RoundRobinGroupChat` template for autonomous sandbox execution.
+
+```python
+import asyncio
+from autogen_ext.models.openai import OpenAIChatCompletionClient
+from autogen_iml import create_iml_swarm
+
+async def main():
+    model_client = OpenAIChatCompletionClient(model="gpt-4o")
+    team = create_iml_swarm(model_client)
+    
+    await team.run(task="Create a Fibonacci sequence in IML")
+
+asyncio.run(main())
 ```
 
 ## License

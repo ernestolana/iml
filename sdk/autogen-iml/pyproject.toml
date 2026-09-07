@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autogen-iml"
+version = "0.1.0"
+description = "Official AutoGen SDK integration for IML"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "autogen-agentchat>=0.4.0",
+    "autogen-core>=0.4.0",
+    "autogen-ext>=0.4.0"
+]
