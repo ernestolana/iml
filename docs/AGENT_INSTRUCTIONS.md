@@ -37,3 +37,6 @@ Any node that allocates a resource or capability handle from the host (e.g., typ
 
 ## 4. Self-Repair Feedback
 If you receive a visual diagnostic or error trace from the supervisor (e.g., `UnconsumedResource(0)`), this means node index `0` in your previous output violated linear typing rules. Adjust your JSON array by appending a drop/consumption node referencing the exact index, and resubmit.
+
+## 5. LangChain/LangGraph Integration
+If you are generating IML inside a Python environment with LangChain/LangGraph, you can utilize the official `langchain-iml` SDK. It provides an `IMLOutputParser` to enforce this schema, an `execute_iml_sandbox` tool to run the code, and a `create_iml_repair_loop` graph to automatically manage generation and self-repair cycles based on Wasm sandbox feedback.
