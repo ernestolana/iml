@@ -139,6 +139,18 @@ result = graph.invoke({
 print(result["execution_result"])
 ```
 
+### Raw Gemini API Integration
+
+You can also use the zero-dependency `google-genai` SDK (`gemini-iml`) to run the self-correction repair loop directly.
+
+```python
+from gemini_iml import IMLAgent
+
+agent = IMLAgent(model_name="gemini-2.5-pro")
+result = agent.execute_task("Create a Fibonacci sequence in IML", max_retries=3)
+print(result)
+```
+
 ## License
 
 IML is open-source and free to use, share, and commercialize. It is dual-licensed under the terms of both the [MIT License](LICENSE-MIT) and the [Apache License (Version 2.0)](LICENSE-APACHE).
